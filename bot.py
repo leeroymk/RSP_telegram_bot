@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher
 from config_data.config import Config, load_config
 from handlers.user_handlers import register_user_handlers
 from handlers.other_handlers import register_other_handlers
+from keyboards.set_menu import set_main_menu
 
 
 logger = logging.getLogger(__name__)
@@ -32,6 +33,8 @@ async def main():
 
     register_all_handlers(dp)
 
+    await set_main_menu(dp)
+
     try:
         await dp.start_polling()
     finally:
@@ -41,5 +44,5 @@ async def main():
 if __name__ == '__main__':
     try:
         asyncio.run(main())
-    except(KeyboardInterrupt, SystemExit):
+    except (KeyboardInterrupt, SystemExit):
         logger.error('Be stopped!')
